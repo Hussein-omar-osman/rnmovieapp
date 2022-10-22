@@ -10,6 +10,7 @@ import React from 'react';
 import {
   SafeAreaView,
   StatusBar,
+  StyleSheet,
   Text,
   useColorScheme,
   View,
@@ -20,15 +21,22 @@ import {
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  console.log('====================================');
+  console.log('hello world');
+  console.log('====================================');
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View>
+      <View style={styles.main}>
         <Text>The start of movie app project</Text>
+        <Text>The next line</Text>
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {justifyContent: 'center', alignItems: 'center'},
+});
 
 export default App;
