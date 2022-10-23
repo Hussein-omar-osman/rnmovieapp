@@ -26,10 +26,6 @@ const App = () => {
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={styles.main}>
-        <Text>The start of movie app project</Text>
-        <Text>The next line</Text>
-      </View>
       <Home />
     </SafeAreaView>
   );
