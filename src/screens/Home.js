@@ -1,21 +1,20 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Dimensions,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, Image, Dimensions, StyleSheet} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getUpcomingMovies} from '../services/apiService';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
 
 const Home = () => {
   const [movieImages, setMovieImages] = useState([]);
-  console.log(width);
-  console.log(height);
+  const translateX = useSharedValue(0);
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    translateX.value = event.contentOffset.x;
+  });
+
   useEffect(() => {
     getUpcomingMovies()
       .then(movies => {
@@ -29,7 +28,12 @@ const Home = () => {
   }, []);
   return (
     <View>
-      <Animated.ScrollView horizontal>
+      <Animated.ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}>
         {movieImages.map((item, i) => (
           <Image key={i} source={{uri: item}} style={styles.imageStyles} />
         ))}
@@ -43,9 +47,12 @@ export default Home;
 
 const styles = StyleSheet.create({
   imageStyles: {
-    margin: 10,
-    width: width - 20,
-    height: height,
-    objectFit: 'contain',
+    // margin: 10,
+    width: width,
+    height: height - 300,
+    resizeMode: 'contain',
+    borderRadius: 35,
+    // borderColor: 'green',
+    // borderWidth: 9,
   },
 });

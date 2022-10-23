@@ -24,7 +24,7 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   console.log('hello world');
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.main}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Home />
     </SafeAreaView>
@@ -32,7 +32,7 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {justifyContent: 'center', alignItems: 'center'},
+  main: {backgroundColor: 'grey', flex: 1},
 });
 
 export default App;
