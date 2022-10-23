@@ -15,16 +15,14 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Home from './src/Home';
+import Home from './src/screens/Home';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  console.log('====================================');
   console.log('hello world');
-  console.log('====================================');
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

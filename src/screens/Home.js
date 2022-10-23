@@ -1,6 +1,6 @@
 import {Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import {getPopularMovies} from './services/apiService';
+import {getPopularMovies} from '../services/apiService';
 
 const Home = () => {
   useEffect(() => {
