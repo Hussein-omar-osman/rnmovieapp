@@ -15,6 +15,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Home from './src/Home';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -31,6 +32,7 @@ const App = () => {
         <Text>The start of movie app project</Text>
         <Text>The next line</Text>
       </View>
+      <Home />
     </SafeAreaView>
   );
 };
