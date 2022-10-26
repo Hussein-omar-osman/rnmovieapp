@@ -21,18 +21,18 @@ import Home from './src/screens/Home';
  * LTI update could not be added via codemod */
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'light';
   console.log('hello world');
   return (
-    <SafeAreaView style={styles.main}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <View style={styles.main}>
+      <StatusBar barStyle={'light-content'} />
       <Home />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {backgroundColor: 'grey', flex: 1},
+  main: {backgroundColor: 'rgba(0,0,0, 0.92)', flex: 1},
 });
 
 export default App;
