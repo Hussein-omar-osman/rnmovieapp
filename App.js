@@ -8,6 +8,7 @@
 
 import React, {useState} from 'react';
 import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Movies from './src/screens/Movies';
 import Tvs from './src/screens/Tvs';
 
@@ -19,14 +20,16 @@ const App = () => {
   const [type, setType] = useState(true);
   console.log('hello world');
   return (
-    <View style={styles.main}>
-      <StatusBar barStyle={'light-content'} />
-      {type ? (
-        <Movies type={type} setType={setType} />
-      ) : (
-        <Tvs type={type} setType={setType} />
-      )}
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <View style={styles.main}>
+        <StatusBar barStyle={'light-content'} />
+        {type ? (
+          <Movies type={type} setType={setType} />
+        ) : (
+          <Tvs type={type} setType={setType} />
+        )}
+      </View>
+    </GestureHandlerRootView>
   );
 };
 
