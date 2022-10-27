@@ -6,20 +6,26 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
 import Movies from './src/screens/Movies';
+import Tvs from './src/screens/Tvs';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
+  const [type, setType] = useState('movies');
   console.log('hello world');
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'light-content'} />
-      <Movies />
+      {type === 'movies' ? (
+        <Movies type={type} setType={setType} />
+      ) : (
+        <Tvs type={type} setType={setType} />
+      )}
     </View>
   );
 };

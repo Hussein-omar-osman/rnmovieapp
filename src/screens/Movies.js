@@ -4,21 +4,15 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  View,
+  StyleSheet,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getUpcomingMovies, getPopularMovies} from '../services/apiService';
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from 'react-native-reanimated';
-import {styles} from '../styles/HomeStyles';
+import SlideShow from '../components/SlideShow';
 
 const Movies = () => {
   const [movieImages, setMovieImages] = useState([]);
-  const translateX = useSharedValue(0);
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    translateX.value = event.contentOffset.x;
-  });
 
   useEffect(() => {
     getPopularMovies()
@@ -37,23 +31,13 @@ const Movies = () => {
   }, []);
   return (
     <ScrollView>
-      <Animated.ScrollView
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}>
-        {movieImages.map((item, i) => (
-          <TouchableOpacity
-            key={i}
-            activeOpacity={1}
-            onPress={() => console.log(item.title)}>
-            <Image source={{uri: item.imgUrl}} style={styles.imageStyles} />
-          </TouchableOpacity>
-        ))}
-      </Animated.ScrollView>
+      <SlideShow listImages={movieImages} />
       <SafeAreaView>
-        <Text style={{color: 'white'}}>
+        <View style={styles.select}>
+          <Text style={styles.textColor}>Movies</Text>
+          <Text style={styles.textColor}>Tv Shows</Text>
+        </View>
+        <Text style={styles.textColor}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
           aspernatur animi molestiae perspiciatis nobis facere accusamus, veniam
           nemo at aperiam inventore minus omnis facilis hic ex possimus nisi
@@ -176,3 +160,16 @@ const Movies = () => {
 };
 
 export default Movies;
+
+const styles = StyleSheet.create({
+  select: {
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    padding: 20,
+  },
+  textColor: {
+    color: 'white',
+  },
+});

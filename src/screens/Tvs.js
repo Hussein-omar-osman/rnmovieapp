@@ -7,51 +7,30 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getPopularTv} from '../services/apiService';
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from 'react-native-reanimated';
 import {styles} from '../styles/HomeStyles';
+import SlideShow from '../components/SlideShow';
 
 const Tvs = () => {
-  const [movieImages, setMovieImages] = useState([]);
-  const translateX = useSharedValue(0);
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    translateX.value = event.contentOffset.x;
-  });
+  const [tvImages, setTvImages] = useState([]);
 
   useEffect(() => {
     getPopularTv()
-      .then(movies => {
-        let imageList = [];
-        movies.forEach(movie =>
-          imageList.push({
-            id: movie.id,
-            title: movie.title,
-            imgUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+      .then(shows => {
+        let tvList = [];
+        shows.forEach(tv =>
+          tvList.push({
+            id: tv.id,
+            title: tv.original_name,
+            imgUrl: `https://image.tmdb.org/t/p/w500${tv.poster_path}`,
           }),
         );
-        setMovieImages(imageList);
+        setTvImages(tvList);
       })
       .catch(e => console.error(e));
   }, []);
   return (
     <ScrollView>
-      <Animated.ScrollView
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}>
-        {movieImages.map((item, i) => (
-          <TouchableOpacity
-            key={i}
-            activeOpacity={1}
-            onPress={() => console.log(item.title)}>
-            <Image source={{uri: item.imgUrl}} style={styles.imageStyles} />
-          </TouchableOpacity>
-        ))}
-      </Animated.ScrollView>
+      <SlideShow listImages={tvImages} />
       <SafeAreaView>
         <Text style={{color: 'white'}}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
