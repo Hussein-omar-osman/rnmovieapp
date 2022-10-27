@@ -16,12 +16,12 @@ import Tvs from './src/screens/Tvs';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
-  const [type, setType] = useState('movies');
+  const [type, setType] = useState(true);
   console.log('hello world');
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'light-content'} />
-      {type === 'movies' ? (
+      {type ? (
         <Movies type={type} setType={setType} />
       ) : (
         <Tvs type={type} setType={setType} />

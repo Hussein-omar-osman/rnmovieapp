@@ -10,11 +10,14 @@ import {
 import React, {useEffect, useState} from 'react';
 import {getUpcomingMovies, getPopularMovies} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
+import TypeSwitcher from '../components/TypeSwitcher';
 
-const Movies = () => {
+const Movies = ({type, setType}) => {
   const [movieImages, setMovieImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getPopularMovies()
       .then(movies => {
         let imageList = [];
@@ -26,17 +29,22 @@ const Movies = () => {
           }),
         );
         setMovieImages(imageList);
+        setLoading(false);
       })
-      .catch(e => console.error(e));
+      .catch(e => {
+        console.error(e);
+        setLoading(false);
+      });
   }, []);
   return (
     <ScrollView>
-      <SlideShow listImages={movieImages} />
+      <SlideShow
+        listImages={movieImages}
+        loading={loading}
+        setLoading={setLoading}
+      />
       <SafeAreaView>
-        <View style={styles.select}>
-          <Text style={styles.textColor}>Movies</Text>
-          <Text style={styles.textColor}>Tv Shows</Text>
-        </View>
+        <TypeSwitcher type={type} setType={setType} />
         <Text style={styles.textColor}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
           aspernatur animi molestiae perspiciatis nobis facere accusamus, veniam
@@ -162,13 +170,6 @@ const Movies = () => {
 export default Movies;
 
 const styles = StyleSheet.create({
-  select: {
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding: 20,
-  },
   textColor: {
     color: 'white',
   },

@@ -1,4 +1,4 @@
-import {TouchableOpacity, Image} from 'react-native';
+import {TouchableOpacity, Image, ActivityIndicator, View} from 'react-native';
 import React from 'react';
 import Animated, {
   useAnimatedScrollHandler,
@@ -7,27 +7,35 @@ import Animated, {
 
 const {width, height} = Dimensions.get('window');
 
-const SlideShow = ({listImages}) => {
+const SlideShow = ({listImages, loading}) => {
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(event => {
     translateX.value = event.contentOffset.x;
   });
   return (
-    <Animated.ScrollView
-      horizontal
-      pagingEnabled
-      showsHorizontalScrollIndicator={false}
-      onScroll={scrollHandler}
-      scrollEventThrottle={16}>
-      {listImages.map((item, i) => (
-        <TouchableOpacity
-          key={i}
-          activeOpacity={1}
-          onPress={() => console.log(item.title)}>
-          <Image source={{uri: item.imgUrl}} style={styles.imageStyles} />
-        </TouchableOpacity>
-      ))}
-    </Animated.ScrollView>
+    <>
+      {loading ? (
+        <View style={styles.loadingImage}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <Animated.ScrollView
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={scrollHandler}
+          scrollEventThrottle={16}>
+          {listImages.map((item, i) => (
+            <TouchableOpacity
+              key={i}
+              activeOpacity={1}
+              onPress={() => console.log(item.title)}>
+              <Image source={{uri: item.imgUrl}} style={styles.imageStyles} />
+            </TouchableOpacity>
+          ))}
+        </Animated.ScrollView>
+      )}
+    </>
   );
 };
 
@@ -44,5 +52,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     // borderColor: 'green',
     // borderWidth: 9,
+  },
+  loadingImage: {
+    width: width,
+    height: height - 270,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

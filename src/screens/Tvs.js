@@ -7,13 +7,15 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getPopularTv} from '../services/apiService';
-import {styles} from '../styles/HomeStyles';
 import SlideShow from '../components/SlideShow';
+import TypeSwitcher from '../components/TypeSwitcher';
 
-const Tvs = () => {
+const Tvs = ({type, setType}) => {
   const [tvImages, setTvImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getPopularTv()
       .then(shows => {
         let tvList = [];
@@ -25,13 +27,22 @@ const Tvs = () => {
           }),
         );
         setTvImages(tvList);
+        setLoading(false);
       })
-      .catch(e => console.error(e));
+      .catch(e => {
+        console.error(e);
+        setLoading(false);
+      });
   }, []);
   return (
     <ScrollView>
-      <SlideShow listImages={tvImages} />
+      <SlideShow
+        listImages={tvImages}
+        loading={loading}
+        setLoading={setLoading}
+      />
       <SafeAreaView>
+        <TypeSwitcher type={type} setType={setType} />
         <Text style={{color: 'white'}}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
           aspernatur animi molestiae perspiciatis nobis facere accusamus, veniam
