@@ -7,15 +7,8 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import Home from './src/screens/Home';
+import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
+import Movies from './src/screens/Movies';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -26,7 +19,7 @@ const App = () => {
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'light-content'} />
-      <Home />
+      <Movies />
     </View>
   );
 };

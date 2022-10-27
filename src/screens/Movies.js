@@ -1,12 +1,8 @@
 import {
-  View,
   Text,
   Image,
-  Dimensions,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Platform,
   SafeAreaView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -15,10 +11,9 @@ import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
+import {styles} from '../styles/HomeStyles';
 
-const {width, height} = Dimensions.get('window');
-
-const Home = () => {
+const Movies = () => {
   const [movieImages, setMovieImages] = useState([]);
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(event => {
@@ -180,16 +175,4 @@ const Home = () => {
   );
 };
 
-export default Home;
-
-const styles = StyleSheet.create({
-  imageStyles: {
-    // margin: 10,
-    width: width,
-    height: height - 270,
-    resizeMode: 'contain',
-    borderRadius: 20,
-    // borderColor: 'green',
-    // borderWidth: 9,
-  },
-});
+export default Movies;
