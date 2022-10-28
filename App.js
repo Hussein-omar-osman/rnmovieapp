@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -18,15 +18,26 @@ import Tvs from './src/screens/Tvs';
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
   const [type, setType] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   console.log('hello world');
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <View style={styles.main}>
         <StatusBar barStyle={'light-content'} />
         {type ? (
-          <Movies type={type} setType={setType} />
+          <Movies
+            type={type}
+            setType={setType}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         ) : (
-          <Tvs type={type} setType={setType} />
+          <Tvs
+            type={type}
+            setType={setType}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         )}
       </View>
     </GestureHandlerRootView>

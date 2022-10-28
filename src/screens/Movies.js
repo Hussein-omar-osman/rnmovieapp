@@ -7,14 +7,26 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback, useMemo, useRef} from 'react';
 import {getUpcomingMovies, getPopularMovies} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
+import BottomSheet from '@gorhom/bottom-sheet';
+import BottomComponent from '../components/BottomComponent';
 
 const Movies = ({type, setType}) => {
   const [movieImages, setMovieImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  // ref
+  const bottomSheetRef = useRef(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback(index => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   useEffect(() => {
     console.log('component mounted');
@@ -41,74 +53,77 @@ const Movies = ({type, setType}) => {
     };
   }, []);
   return (
-    <ScrollView>
-      <SlideShow
-        listImages={movieImages}
-        loading={loading}
-        setLoading={setLoading}
-      />
-      <SafeAreaView>
-        <TypeSwitcher type={type} setType={setType} />
-        <Text style={styles.textColor}>Top Rated movies</Text>
-        <ScrollView horizontal style={styles.categorySlide}>
-          <View style={styles.imgScroll}>
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-              }}
-            />
-          </View>
-        </ScrollView>
-        <Text style={styles.textColor}>Popular movies</Text>
-        <ScrollView horizontal style={styles.categorySlide}>
-          <View style={styles.imgScroll}>
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-              }}
-            />
-            <Image
-              style={styles.imageSize}
-              source={{
-                url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-              }}
-            />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </ScrollView>
+    <>
+      <ScrollView>
+        <SlideShow
+          listImages={movieImages}
+          loading={loading}
+          setLoading={setLoading}
+        />
+        <SafeAreaView>
+          <TypeSwitcher type={type} setType={setType} />
+          <Text style={styles.textColor}>Top Rated movies</Text>
+          <ScrollView horizontal style={styles.categorySlide}>
+            <View style={styles.imgScroll}>
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+            </View>
+          </ScrollView>
+          <Text style={styles.textColor}>Popular movies</Text>
+          <ScrollView horizontal style={styles.categorySlide}>
+            <View style={styles.imgScroll}>
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </ScrollView>
+      <BottomComponent />
+    </>
   );
 };
 
