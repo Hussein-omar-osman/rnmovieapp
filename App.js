@@ -18,8 +18,11 @@ import Tvs from './src/screens/Tvs';
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
   const [type, setType] = useState(true);
-  const [isOpen, setIsOpen] = useState(true);
-  console.log('hello world');
+  const [isOpen, setIsOpen] = useState(false);
+  const openBottomSheet = () => {
+    setIsOpen(false);
+    setIsOpen(true);
+  };
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <View style={styles.main}>
@@ -30,6 +33,7 @@ const App = () => {
             setType={setType}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            openBottomSheet={openBottomSheet}
           />
         ) : (
           <Tvs
@@ -37,6 +41,7 @@ const App = () => {
             setType={setType}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            openBottomSheet={openBottomSheet}
           />
         )}
       </View>
@@ -45,7 +50,7 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  main: {backgroundColor: 'rgba(0,0,0, 0.92)', flex: 1},
+  main: {backgroundColor: 'rgba(0,0,0, 0.95)', flex: 1},
 });
 
 export default App;

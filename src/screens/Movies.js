@@ -7,27 +7,15 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import React, {useEffect, useState, useCallback, useMemo, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getUpcomingMovies, getPopularMovies} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
-import BottomSheet from '@gorhom/bottom-sheet';
 import BottomComponent from '../components/BottomComponent';
 
-const Movies = ({type, setType}) => {
+const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [movieImages, setMovieImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  // ref
-  const bottomSheetRef = useRef(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // callbacks
-  const handleSheetChanges = useCallback(index => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
   useEffect(() => {
     console.log('component mounted');
     setLoading(true);
@@ -59,10 +47,13 @@ const Movies = ({type, setType}) => {
           listImages={movieImages}
           loading={loading}
           setLoading={setLoading}
+          openBottomSheet={openBottomSheet}
         />
         <SafeAreaView>
           <TypeSwitcher type={type} setType={setType} />
-          <Text style={styles.textColor}>Top Rated movies</Text>
+          <TouchableOpacity onPress={openBottomSheet}>
+            <Text style={styles.textColor}>Top Rated movies</Text>
+          </TouchableOpacity>
           <ScrollView horizontal style={styles.categorySlide}>
             <View style={styles.imgScroll}>
               <Image
@@ -122,7 +113,7 @@ const Movies = ({type, setType}) => {
           </ScrollView>
         </SafeAreaView>
       </ScrollView>
-      <BottomComponent />
+      {isOpen && <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen} />}
     </>
   );
 };

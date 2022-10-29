@@ -2,12 +2,13 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 
 const TypeSwitcher = ({type, setType}) => {
-  console.log(type);
   return (
     <View style={styles.selectWrapper}>
       <View style={styles.select}>
         <TouchableOpacity
-          onPress={() => setType(true)}
+          onPress={() => {
+            setType(true);
+          }}
           style={[
             styles.singleSelected,
             {backgroundColor: type ? 'green' : 'grey'},
