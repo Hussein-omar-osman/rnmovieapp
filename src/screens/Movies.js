@@ -111,6 +111,90 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
               />
             </View>
           </ScrollView>
+          <ScrollView horizontal style={styles.categorySlide}>
+            <View style={styles.imgScroll}>
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+            </View>
+          </ScrollView>
+          <ScrollView horizontal style={styles.categorySlide}>
+            <View style={styles.imgScroll}>
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+            </View>
+          </ScrollView>
+          <ScrollView horizontal style={styles.categorySlide}>
+            <View style={styles.imgScroll}>
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
+                }}
+              />
+              <Image
+                style={styles.imageSize}
+                source={{
+                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
+                }}
+              />
+            </View>
+          </ScrollView>
         </SafeAreaView>
       </ScrollView>
       {isOpen && <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen} />}
