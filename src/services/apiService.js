@@ -15,10 +15,27 @@ const getUpcomingMovies = async () => {
   return data.results;
 };
 
+const getTopRatedMovies = async () => {
+  const res = await fetch(`${url}/movie/top_rated?api_key=${apiKey}`);
+  const data = await res.json();
+  return data.results;
+};
+const getNowPlayingMovies = async () => {
+  const res = await fetch(`${url}/movie/now_playing?api_key=${apiKey}`);
+  const data = await res.json();
+  return data.results;
+};
+
 const getPopularTv = async () => {
   const res = await fetch(`${url}/tv/popular?api_key=${apiKey}`);
   const data = await res.json();
   return data.results;
 };
 
-export {getPopularMovies, getUpcomingMovies, getPopularTv};
+export {
+  getPopularMovies,
+  getUpcomingMovies,
+  getPopularTv,
+  getTopRatedMovies,
+  getNowPlayingMovies,
+};
