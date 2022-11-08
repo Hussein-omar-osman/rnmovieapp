@@ -12,6 +12,8 @@ import {getUpcomingMovies, getPopularMovies} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
 import BottomComponent from '../components/BottomComponent';
+import SectionSlider from '../components/SectionSlider';
+// import SectionSlider from '../components/SectionSlider';
 
 const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [movieImages, setMovieImages] = useState([]);
@@ -54,147 +56,9 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           <TouchableOpacity onPress={openBottomSheet}>
             <Text style={styles.textColor}>Top Rated movies</Text>
           </TouchableOpacity>
-          <ScrollView horizontal style={styles.categorySlide}>
-            <View style={styles.imgScroll}>
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-            </View>
-          </ScrollView>
+          <SectionSlider />
           <Text style={styles.textColor}>Popular movies</Text>
-          <ScrollView horizontal style={styles.categorySlide}>
-            <View style={styles.imgScroll}>
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-            </View>
-          </ScrollView>
-          <ScrollView horizontal style={styles.categorySlide}>
-            <View style={styles.imgScroll}>
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-            </View>
-          </ScrollView>
-          <ScrollView horizontal style={styles.categorySlide}>
-            <View style={styles.imgScroll}>
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-            </View>
-          </ScrollView>
-          <ScrollView horizontal style={styles.categorySlide}>
-            <View style={styles.imgScroll}>
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/qAv0UoAQVZWd6HGc83fsli1aKmo.jpg',
-                }}
-              />
-              <Image
-                style={styles.imageSize}
-                source={{
-                  url: 'https://image.tmdb.org/t/p/w500/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg',
-                }}
-              />
-            </View>
-          </ScrollView>
+          <SectionSlider />
         </SafeAreaView>
       </ScrollView>
       {isOpen && <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen} />}
