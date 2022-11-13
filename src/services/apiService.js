@@ -9,7 +9,7 @@ const getMovieTypeData = async type => {
   return data.results;
 };
 const getTVTypeData = async type => {
-  const res = await fetch(`${url}/movie/${type}?api_key=${apiKey}`);
+  const res = await fetch(`${url}/tv/${type}?api_key=${apiKey}`);
   const data = await res.json();
   return data.results;
 };
