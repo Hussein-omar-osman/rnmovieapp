@@ -1,22 +1,48 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
 
-const SectionSlider = ({movies}) => {
+const SectionSlider = ({movies, loading}) => {
   return (
-    <ScrollView horizontal style={styles.categorySlide}>
-      <View style={styles.imgScroll}>
-        {movies.map(movie => (
-          <Image
-            key={movie.id}
-            style={styles.imageSize}
-            source={{
-              url: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
-            }}
-          />
-        ))}
-      </View>
-    </ScrollView>
+    <>
+      {/* <ScrollView horizontal style={styles.categorySlide}>
+        <View style={styles.imgScroll}>
+          {loading
+            ? [1, 2, 3, 4].map((item, i) => (
+                <ActivityIndicator key={i} style={styles.imageSize} />
+              ))
+            : movies.map(movie => (
+                <Image
+                  key={movie.id}
+                  style={styles.imageSize}
+                  loadingIndicatorSource={<ActivityIndicator />}
+                  source={{
+                    url: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+                  }}
+                />
+              ))}
+        </View>
+      </ScrollView> */}
+      <FlatList
+        horizontal
+        style={styles.imgScroll}
+        data={movies}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => {
+          if (loading) {
+            return <ActivityIndicator style={styles.imageSize} />;
+          }
+          return (
+            <Image
+              style={styles.imageSize}
+              loadingIndicatorSource={<ActivityIndicator />}
+              source={{
+                url: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+              }}
+            />
+          );
+        }}
+      />
+    </>
   );
 };
 

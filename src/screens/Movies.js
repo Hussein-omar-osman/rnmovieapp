@@ -7,7 +7,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   getUpcomingMovies,
   getPopularMovies,
@@ -28,7 +28,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [upcoming, setUpcoming] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const pupularMovieData = await getMovieTypeData('popular');
@@ -53,37 +53,11 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
       console.log(error);
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    console.log('component mounted');
-    // setLoading(true);
-    // getPopularMovies()
-    //   .then(movies => {
-    //     let imageList = [];
-    //     movies.forEach(movie =>
-    //       imageList.push({
-    //         id: movie.id,
-    //         title: movie.title,
-    //         imgUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-    //       }),
-    //     );
-    //     setMovieImages(imageList);
-    //     setPopularMovie(movies);
-    //     setLoading(false);
-    //   })
-    //   .catch(e => {
-    //     console.error(e);
-    //     setLoading(false);
-    //   });
-    // getTopRatedMovies()
-    //   .then(movies => setTopRatedMovies(movies))
-    //   .catch(e => console.error(e));
     fetchData().then().catch();
-    return () => {
-      console.log('component unmounted');
-    };
-  }, []);
+  }, [fetchData]);
   return (
     <>
       <ScrollView>
@@ -98,14 +72,19 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           <TouchableOpacity onPress={openBottomSheet}>
             <Text style={styles.textColor}>Top Rated movies</Text>
           </TouchableOpacity>
-          <SectionSlider movies={topRatedMovies} />
+          <SectionSlider loading={loading} movies={topRatedMovies} />
           <Text style={styles.textColor}>Popular movies</Text>
-          <SectionSlider movies={popularMovie} />
+          <SectionSlider loading={loading} movies={popularMovie.reverse()} />
           <Text style={styles.textColor}>Now Playing</Text>
-          <SectionSlider movies={nowPlaying} />
+          <SectionSlider loading={loading} movies={nowPlaying.reverse()} />
           <Text style={styles.textColor}>Upcoming Movies</Text>
-          <SectionSlider movies={upcoming} />
+          <SectionSlider loading={loading} movies={upcoming.reverse()} />
         </SafeAreaView>
+        <Image
+          source={{
+            url: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
+          }}
+        />
       </ScrollView>
       {isOpen && <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen} />}
     </>
@@ -117,6 +96,7 @@ export default Movies;
 const styles = StyleSheet.create({
   textColor: {
     color: 'white',
+    marginVertical: 10,
   },
   categorySlide: {
     marginVertical: 10,

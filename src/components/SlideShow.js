@@ -30,7 +30,11 @@ const SlideShow = ({listImages, loading, openBottomSheet}) => {
               key={i}
               activeOpacity={1}
               onPress={openBottomSheet}>
-              <Image source={{uri: item.imgUrl}} style={styles.imageStyles} />
+              <Image
+                source={{uri: item.imgUrl}}
+                loadingIndicatorSource={<ActivityIndicator />}
+                style={styles.imageStyles}
+              />
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
