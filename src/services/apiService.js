@@ -8,26 +8,8 @@ const getMovieTypeData = async type => {
   const data = await res.json();
   return data.results;
 };
-
-const getPopularMovies = async () => {
-  const res = await fetch(`${url}/movie/popular?api_key=${apiKey}`);
-  const data = await res.json();
-  return data.results;
-};
-
-const getUpcomingMovies = async () => {
-  const res = await fetch(`${url}/movie/upcoming?api_key=${apiKey}`);
-  const data = await res.json();
-  return data.results;
-};
-
-const getTopRatedMovies = async () => {
-  const res = await fetch(`${url}/movie/top_rated?api_key=${apiKey}`);
-  const data = await res.json();
-  return data.results;
-};
-const getNowPlayingMovies = async () => {
-  const res = await fetch(`${url}/movie/now_playing?api_key=${apiKey}`);
+const getTVTypeData = async type => {
+  const res = await fetch(`${url}/movie/${type}?api_key=${apiKey}`);
   const data = await res.json();
   return data.results;
 };
@@ -38,11 +20,4 @@ const getPopularTv = async () => {
   return data.results;
 };
 
-export {
-  getPopularMovies,
-  getUpcomingMovies,
-  getPopularTv,
-  getTopRatedMovies,
-  getNowPlayingMovies,
-  getMovieTypeData,
-};
+export {getPopularTv, getMovieTypeData, getTVTypeData};

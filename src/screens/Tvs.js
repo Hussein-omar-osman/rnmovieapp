@@ -5,14 +5,45 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {getPopularTv} from '../services/apiService';
+import React, {useCallback, useEffect, useState} from 'react';
+import {getPopularTv, getTVTypeData} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
 
 const Tvs = ({type, setType}) => {
   const [tvImages, setTvImages] = useState([]);
+  const [nowPlayingTV, setNowPlayingTV] = useState([]);
+  const [pupularTV, setPupularTV] = useState([]);
+  const [topRatedTV, setTopRatedTV] = useState([]);
+  const [latestTV, setTatestTV] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const fetchTVData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const pupularTVData = await getTVTypeData('popular');
+      const nowPlayingTVData = await getTVTypeData('on_the_air');
+      const topRatedTVData = await getTVTypeData('top_rated');
+      const latestTVData = await getTVTypeData('latest');
+      let tvList = [];
+      pupularTVData.forEach(tv =>
+        tvList.push({
+          id: tv.id,
+          title: tv.original_name,
+          imgUrl: `https://image.tmdb.org/t/p/w500${tv.poster_path}`,
+        }),
+      );
+      setTvImages(tvList);
+      setPupularTV(pupularTVData);
+      setNowPlayingTV(nowPlayingTVData);
+      setTopRatedTV(topRatedTVData);
+      setTatestTV(latestTVData);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     setLoading(true);
