@@ -64,6 +64,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           loading={loading}
           setLoading={setLoading}
           openBottomSheet={openBottomSheet}
+          selected={selected}
           setSelected={setSelected}
         />
         <SafeAreaView>
@@ -76,6 +77,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
             movies={topRatedMovies}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
+            selected={selected}
           />
           <Text style={styles.textColor}>Popular movies</Text>
           <SectionSlider
@@ -83,6 +85,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
             movies={popularMovie}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
+            selected={selected}
           />
           <Text style={styles.textColor}>Now Playing</Text>
           <SectionSlider
@@ -90,6 +93,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
             movies={nowPlaying}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
+            selected={selected}
           />
           <Text style={styles.textColor}>Upcoming Movies</Text>
           <SectionSlider
@@ -97,6 +101,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
             movies={upcoming}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
+            selected={selected}
           />
         </SafeAreaView>
       </ScrollView>

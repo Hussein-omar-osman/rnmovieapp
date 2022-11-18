@@ -7,7 +7,13 @@ import Animated, {
 
 const {width, height} = Dimensions.get('window');
 
-const SlideShow = ({listImages, loading, openBottomSheet, setSelected}) => {
+const SlideShow = ({
+  listImages,
+  loading,
+  openBottomSheet,
+  setSelected,
+  selected,
+}) => {
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(event => {
     translateX.value = event.contentOffset.x;
@@ -30,6 +36,9 @@ const SlideShow = ({listImages, loading, openBottomSheet, setSelected}) => {
               key={i}
               activeOpacity={1}
               onPress={() => {
+                if (selected === item.id) {
+                  return;
+                }
                 openBottomSheet();
                 setSelected(item.id);
               }}>

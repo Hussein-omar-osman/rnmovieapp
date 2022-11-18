@@ -42,6 +42,12 @@ const BottomComponent = ({isOpen, setIsOpen, children}) => {
     props => (
       <BottomSheetBackdrop
         {...props}
+        style={[
+          props.style,
+          {
+            backgroundColor: 'black',
+          },
+        ]}
         pressBehavior="collapse"
         enableTouchThrough={false}
         onPress={() => console.log('clicked')}

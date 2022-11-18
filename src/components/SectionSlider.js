@@ -7,7 +7,13 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const SectionSlider = ({movies, loading, openBottomSheet, setSelected}) => {
+const SectionSlider = ({
+  movies,
+  loading,
+  openBottomSheet,
+  setSelected,
+  selected,
+}) => {
   return (
     <>
       {/* <ScrollView horizontal style={styles.categorySlide}>
@@ -40,6 +46,9 @@ const SectionSlider = ({movies, loading, openBottomSheet, setSelected}) => {
           return (
             <TouchableOpacity
               onPress={() => {
+                if (selected === item.id) {
+                  return;
+                }
                 openBottomSheet();
                 setSelected(item.id);
               }}>
