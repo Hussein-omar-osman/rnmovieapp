@@ -7,7 +7,7 @@ import Animated, {
 
 const {width, height} = Dimensions.get('window');
 
-const SlideShow = ({listImages, loading, openBottomSheet}) => {
+const SlideShow = ({listImages, loading, openBottomSheet, setSelected}) => {
   const translateX = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(event => {
     translateX.value = event.contentOffset.x;
@@ -29,7 +29,10 @@ const SlideShow = ({listImages, loading, openBottomSheet}) => {
             <TouchableOpacity
               key={i}
               activeOpacity={1}
-              onPress={openBottomSheet}>
+              onPress={() => {
+                openBottomSheet();
+                setSelected(item.id);
+              }}>
               <Image
                 source={{uri: item.imgUrl}}
                 loadingIndicatorSource={<ActivityIndicator />}

@@ -21,8 +21,12 @@ const App = () => {
   const [type, setType] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const openBottomSheet = () => {
+    if (!isOpen) {
+      setIsOpen(true);
+      return;
+    }
     setIsOpen(false);
-    setIsOpen(true);
+    setTimeout(() => setIsOpen(true), 20);
   };
   return (
     <GestureHandlerRootView style={{flex: 1}}>

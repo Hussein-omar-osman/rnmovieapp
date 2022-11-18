@@ -8,17 +8,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  getUpcomingMovies,
-  getPopularMovies,
-  getTopRatedMovies,
-  getMovieTypeData,
-} from '../services/apiService';
+import {getMovieTypeData} from '../services/apiService';
 import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
 import BottomComponent from '../components/BottomComponent';
 import SectionSlider from '../components/SectionSlider';
-// import SectionSlider from '../components/SectionSlider';
 
 const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [movieImages, setMovieImages] = useState([]);
@@ -27,6 +21,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState('');
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -58,6 +53,9 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   useEffect(() => {
     fetchData().then().catch();
   }, [fetchData]);
+
+  console.log(selected);
+
   return (
     <>
       <ScrollView>
@@ -66,27 +64,45 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           loading={loading}
           setLoading={setLoading}
           openBottomSheet={openBottomSheet}
+          setSelected={setSelected}
         />
         <SafeAreaView>
           <TypeSwitcher type={type} setType={setType} />
           <TouchableOpacity onPress={openBottomSheet}>
             <Text style={styles.textColor}>Top Rated movies</Text>
           </TouchableOpacity>
-          <SectionSlider loading={loading} movies={topRatedMovies} />
+          <SectionSlider
+            loading={loading}
+            movies={topRatedMovies}
+            openBottomSheet={openBottomSheet}
+            setSelected={setSelected}
+          />
           <Text style={styles.textColor}>Popular movies</Text>
-          <SectionSlider loading={loading} movies={popularMovie.reverse()} />
+          <SectionSlider
+            loading={loading}
+            movies={popularMovie}
+            openBottomSheet={openBottomSheet}
+            setSelected={setSelected}
+          />
           <Text style={styles.textColor}>Now Playing</Text>
-          <SectionSlider loading={loading} movies={nowPlaying.reverse()} />
+          <SectionSlider
+            loading={loading}
+            movies={nowPlaying}
+            openBottomSheet={openBottomSheet}
+            setSelected={setSelected}
+          />
           <Text style={styles.textColor}>Upcoming Movies</Text>
-          <SectionSlider loading={loading} movies={upcoming.reverse()} />
+          <SectionSlider
+            loading={loading}
+            movies={upcoming}
+            openBottomSheet={openBottomSheet}
+            setSelected={setSelected}
+          />
         </SafeAreaView>
-        <Image
-          source={{
-            url: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg',
-          }}
-        />
       </ScrollView>
-      {isOpen && <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen} />}
+      <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Text style={{color: 'white'}}>{selected}</Text>
+      </BottomComponent>
     </>
   );
 };

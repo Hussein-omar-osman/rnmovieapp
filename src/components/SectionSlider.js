@@ -1,7 +1,13 @@
-import {ActivityIndicator, FlatList, Image, StyleSheet} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 
-const SectionSlider = ({movies, loading}) => {
+const SectionSlider = ({movies, loading, openBottomSheet, setSelected}) => {
   return (
     <>
       {/* <ScrollView horizontal style={styles.categorySlide}>
@@ -32,13 +38,19 @@ const SectionSlider = ({movies, loading}) => {
             return <ActivityIndicator style={styles.imageSize} />;
           }
           return (
-            <Image
-              style={styles.imageSize}
-              loadingIndicatorSource={<ActivityIndicator />}
-              source={{
-                url: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
-              }}
-            />
+            <TouchableOpacity
+              onPress={() => {
+                openBottomSheet();
+                setSelected(item.id);
+              }}>
+              <Image
+                style={styles.imageSize}
+                loadingIndicatorSource={<ActivityIndicator />}
+                source={{
+                  url: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+                }}
+              />
+            </TouchableOpacity>
           );
         }}
       />

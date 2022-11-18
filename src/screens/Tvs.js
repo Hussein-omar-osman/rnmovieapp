@@ -12,7 +12,7 @@ import SlideShow from '../components/SlideShow';
 import TypeSwitcher from '../components/TypeSwitcher';
 import SectionSlider from '../components/SectionSlider';
 
-const Tvs = ({type, setType}) => {
+const Tvs = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [tvImages, setTvImages] = useState([]);
   const [nowPlayingTV, setNowPlayingTV] = useState([]);
   const [pupularTV, setPupularTV] = useState([]);
