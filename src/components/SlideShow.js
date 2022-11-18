@@ -32,16 +32,7 @@ const SlideShow = ({
           onScroll={scrollHandler}
           scrollEventThrottle={16}>
           {listImages.map((item, i) => (
-            <TouchableOpacity
-              key={i}
-              activeOpacity={1}
-              onPress={() => {
-                if (selected === item.id) {
-                  return;
-                }
-                openBottomSheet();
-                setSelected(item.id);
-              }}>
+            <TouchableOpacity key={i} activeOpacity={1}>
               <Image
                 source={{uri: item.imgUrl}}
                 loadingIndicatorSource={<ActivityIndicator />}

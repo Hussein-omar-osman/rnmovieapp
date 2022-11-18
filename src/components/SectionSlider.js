@@ -4,6 +4,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import React from 'react';
 
@@ -34,35 +35,44 @@ const SectionSlider = ({
               ))}
         </View>
       </ScrollView> */}
-      <FlatList
-        horizontal
-        style={styles.imgScroll}
-        data={movies}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => {
-          if (loading) {
-            return <ActivityIndicator style={styles.imageSize} />;
-          }
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                if (selected === item.id) {
-                  return;
-                }
-                openBottomSheet();
-                setSelected(item.id);
-              }}>
-              <Image
-                style={styles.imageSize}
-                loadingIndicatorSource={<ActivityIndicator />}
-                source={{
-                  url: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
-                }}
-              />
-            </TouchableOpacity>
-          );
-        }}
-      />
+      {loading ? (
+        <View style={styles.imgScroll}>
+          <ActivityIndicator style={styles.imageSize} />
+          <ActivityIndicator style={styles.imageSize} />
+          <ActivityIndicator style={styles.imageSize} />
+        </View>
+      ) : (
+        <FlatList
+          horizontal
+          style={styles.imgScroll}
+          data={movies}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <>
+              {loading ? (
+                <ActivityIndicator style={styles.imageSize} />
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    if (selected.id === item.id) {
+                      return;
+                    }
+                    openBottomSheet();
+                    setSelected(item);
+                  }}>
+                  <Image
+                    style={styles.imageSize}
+                    loadingIndicatorSource={<ActivityIndicator />}
+                    source={{
+                      url: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+                    }}
+                  />
+                </TouchableOpacity>
+              )}
+            </>
+          )}
+        />
+      )}
     </>
   );
 };

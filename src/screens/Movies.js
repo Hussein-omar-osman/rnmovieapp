@@ -21,7 +21,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState({});
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -54,7 +54,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
     fetchData().then().catch();
   }, [fetchData]);
 
-  console.log(selected);
+  console.log(loading);
 
   return (
     <>
@@ -63,9 +63,6 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           listImages={movieImages}
           loading={loading}
           setLoading={setLoading}
-          openBottomSheet={openBottomSheet}
-          selected={selected}
-          setSelected={setSelected}
         />
         <SafeAreaView>
           <TypeSwitcher type={type} setType={setType} />
@@ -82,7 +79,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           <Text style={styles.textColor}>Popular movies</Text>
           <SectionSlider
             loading={loading}
-            movies={popularMovie}
+            movies={[...popularMovie].reverse()}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
             selected={selected}
@@ -98,7 +95,7 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
           <Text style={styles.textColor}>Upcoming Movies</Text>
           <SectionSlider
             loading={loading}
-            movies={upcoming}
+            movies={[...upcoming].reverse()}
             openBottomSheet={openBottomSheet}
             setSelected={setSelected}
             selected={selected}
@@ -106,7 +103,8 @@ const Movies = ({type, setType, isOpen, setIsOpen, openBottomSheet}) => {
         </SafeAreaView>
       </ScrollView>
       <BottomComponent isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Text style={{color: 'white'}}>{selected}</Text>
+        <Text style={{color: 'white'}}>{selected.id}</Text>
+        <Text style={{color: 'white'}}>{selected.overview}</Text>
       </BottomComponent>
     </>
   );
